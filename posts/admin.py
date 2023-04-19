@@ -3,7 +3,7 @@ from .models import Post
 from django_summernote.admin import SummernoteModelAdmin
 
 class PostAdmin(SummernoteModelAdmin):
-    list_display = ('id', 'title_post', 'author_post', 'data_post',
+    list_display = ('id', 'title_post', 'author_post', 'date_post',
                     'category_post', 'published_post',)
     list_editable = ('published_post',)
     list_display_links = ('id', 'title_post',)

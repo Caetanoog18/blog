@@ -8,7 +8,7 @@ import os
 class Post(models.Model):
     title_post = models.CharField(max_length=255, verbose_name='Title')
     author_post = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Author')
-    data_post = models.DateTimeField(default=timezone.now, verbose_name='Data')
+    date_post = models.DateTimeField(default=timezone.now, verbose_name='Date')
     content_post = models.TextField(verbose_name='Content')
     excerpt_post = models.TextField(verbose_name='Excerpt')
     category_post = models.ForeignKey(Category, on_delete=models.DO_NOTHING,

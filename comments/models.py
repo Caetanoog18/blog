@@ -10,7 +10,7 @@ class Comment(models.Model):
     comment = models.TextField(verbose_name='Comment')
     post_comment = models.ForeignKey(Post, on_delete=models.CASCADE)
     user_comment = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, null=True)
-    data_comment = models.DateTimeField(default=timezone.now)
+    date_comment = models.DateTimeField(default=timezone.now)
     published_comment = models.BooleanField(default=False)
 
     def __str__(self):
