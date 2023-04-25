@@ -1,44 +1,78 @@
 {% extends 'base.html' %}
-{% load humanize %}
+
+{% block titulo %}{{ post.titulo_post|title }} | {% endblock %}
 
 {% block content %}
-<!-- CONTENT -->
-            <div class="card-columns mt-4">
-                {% for post in posts %}
-                <div class="card">
+<!-- POST -->
+<div class="container">
+    <div class="row pt-5">
+        <div class="col-xl"></div>
+        <div class="col-xl-8 text-center">
+            <h2>{{ post.title_post}}</h2>
+            <h5>{{ post.excerpt_post}}</h5>
+            <p class="text-muted mt-4">
+                <small>
+                    {{ post.author_post }} | {{ post.date_post }} | {{ post.category_post }}
+                </small>
+            </p>
+        </div>
+        <div class="col-xl"></div>
+    </div>
 
-                    {% if post.image_post %}
-                    <a href="{% url 'post_details' post.id%}">
-                        <img class="card-img-top"
-                             src="{{ post.image_post.url }}"
-                             alt="{{post.title_post}}">
-                    </a>
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="{% url 'post_details' post.id%}">
-                                {{ post.title_post }}
-                            </a>
-                        </h5>
-                        <p class="card-text">{{ post.excerpt_post}}</p>
-                        <p class="card-text">
-                            <small class="text-muted">
-                                {{ post.date_post|naturalday|title}}
-                                |
-                                {{ post.number_comments }} comment(s)
-                                |
-                                {{ post.category_post }}
-                            </small>
-                        </p>
+    <div class="row pt-5">
+        <div class="col-xl"></div>
+        <div class="col-xl-8">
 
-                        <div class="text-right">
-                            <a href="{% url 'post_details' post.id%}" class="btn btn-outline-secondary">Read more...</a>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            <!--/CONTENT-->
+            {% if post.image_post %}
+            <img class="img-fluid pb-5 " src="imagens/linux_system_hi-tech_73419_1280x720.jpg" alt="">
+            {% endif %}
 
-    {% include 'partial/_pagination.html' %}
+            {{ post.content_post|safe }}
+
+        </div>
+        <div class="col-xl"></div>
+    </div>
+
+{% if comments %}
+    <div class="row pt-5">
+        <div class="col-xl"></div>
+        <div class="col-xl-8">
+            <h2 class="my-3">Comments ({{ comments.count }}) </h2>
+
+            {% for comment in comments %}
+            <h5 class="mb-2 mt-5">{{ comment.nome_comment }} said:</h5>
+            <small class="text-muted">{{ comment.date_comment }}</small>
+            <p class="mb-1">{{ comment.comment }}</p>
+            {% endfor %}
+
+        </div>
+        <div class="col-xl"></div>
+    </div>
+{% endif %}
+
+    <div class="row pt-5">
+        <div class="col-xl"></div>
+        <div class="col-xl-8">
+            <h2 class="my-3">Leave your comment</h2>
+
+            <form method="POST" action="#send_comment">
+                {% csrf_token %}
+                <table class="table">
+                    {{ form }}
+                    <tr>
+                        <td colspan="2">
+                            {% include 'partial/_messages.html' %}
+                            <input id="send_comment" type="submit" class="btn btn-primary"
+                                   value="Submit">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+
+        </div>
+        <div class="col-xl"></div>
+    </div>
+</div>
+<!-- POST -->
 {% endblock %}

@@ -14,17 +14,17 @@
                     <a class="nav-link" href="{% url 'post_category' 'python'%}">Python</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'post_category' 'django'%">Django</a>
+                    <a class="nav-link" href="{% url 'post_category' 'django'%}">Django</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'post_category' %l 'technology'">Technology</a>
+                    <a class="nav-link" href="{% url 'post_category'  'technology'%}">Technology</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'post_category' 'dystems'%">Systems</a>
+                    <a class="nav-link" href="{% url 'post_category' 'systems'%}">Systems</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0 ml-lg-4" action="{% url 'post_search' %}">
-                <input name="term" value="{{ request.GET.termo }}" class="form-control mr-sm-2" type="search" placeholder="Search"
+                <input name="term" value="{{ request.GET.term }}" class="form-control mr-sm-2" type="search" placeholder="Search"
                        aria-label="Search">
             </form>
         </div>
