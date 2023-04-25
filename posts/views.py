@@ -70,11 +70,20 @@ class PostDetails(UpdateView):
     context_object_name = 'post'
 
 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Get the current post
+        post = self.get_object()
+        comments = Comment.objects.filter(published_comment = True, post_comment = post.id)
+
+        context['comments'] = comments
+        return context
+
     def form_valid(self, form):
         post = self.get_object()
         comment = Comment(**form.cleaned_data)
         comment.post_comment = post
-
 
         # Checking if the user is logged in
         if self.request.user.is_authenticated:
